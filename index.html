@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Upload Customer</title>
+</head>
+<body>
+  <h1>Upload Customer</h1>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Enter title" required><br><br>
+    <input type="file" name="file"><br><br>
+    <button type="submit">Upload</button>
+  </form>
+
+  <script>
+    document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+
+      const res = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await res.json();
+      alert(JSON.stringify(data));
+    });
+  </script>
+</body>
+</html>
